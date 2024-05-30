@@ -16,6 +16,7 @@ long raw_ROW, raw_PITCH, raw_YAW;
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]*/
 long map_ROW, map_PITCH, map_YAW;
 int state = 0;
+int gap_Degree = 7 ;
 
 int RmotorPin1 = 2;
 int RmotorPin2 = 3;
@@ -61,33 +62,33 @@ void loop() {
   Serial.print(" || YAW = ");
   Serial.print(dataArray[2], DEC);
 
-  if (raw_ROW > 14) {
+  if (raw_ROW > gap_Degree) {
     map_ROW = map(raw_ROW, 0, 127, 4, 2);
   }
-  if (raw_ROW < -14) {
+  if (raw_ROW < -gap_Degree) {
     map_ROW = map(raw_ROW, -128, 0, -2, -4);
   }
-  if (raw_ROW <= 14 && raw_ROW >= -14) {
+  if (raw_ROW <= gap_Degree && raw_ROW >= -gap_Degree) {
     map_ROW = 0;
   }
 
-  if (raw_PITCH > 14) {
+  if (raw_PITCH > gap_Degree) {
     map_PITCH = map(raw_PITCH, 0, 127, 4, 2);
   }
-  if (raw_PITCH < -14) {
+  if (raw_PITCH < -gap_Degree) {
     map_PITCH = map(raw_PITCH, -128, 0, -2, -4);
   }
-  if (raw_PITCH <= 14 && raw_PITCH >= -14) {
+  if (raw_PITCH <= gap_Degree && raw_PITCH >= -gap_Degree) {
     map_PITCH = 0;
   }
 
-  if (raw_YAW > 14) {
+  if (raw_YAW > gap_Degree) {
     map_YAW = map(raw_YAW, 0, 127, 4, 2);
   }
-  if (raw_YAW < -14) {
+  if (raw_YAW < -gap_Degree) {
     map_YAW = map(raw_YAW, -128, 0, -2, -4);
   }
-  if (raw_YAW <= 14 && raw_YAW >= -14) {
+  if (raw_YAW <= gap_Degree && raw_YAW >= -gap_Degree) {
     map_YAW = 0;
   }
 
