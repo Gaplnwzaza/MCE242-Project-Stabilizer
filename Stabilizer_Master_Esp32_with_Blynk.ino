@@ -101,9 +101,9 @@ float set_point_YAW = 0;
 
 float Min_out = -128;
 float Max_out = 127;
-float kp = 5;//10
-float ki = 0.0010;//0.008
-float kd = 39;//75
+float kp = 12;//10
+float ki = 0.009;//0.008
+float kd = 90;//75
 /*    ^^^
        |
        |

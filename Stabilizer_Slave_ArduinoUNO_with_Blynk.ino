@@ -16,7 +16,7 @@ long raw_ROW, raw_PITCH, raw_YAW;
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]*/
 long map_ROW, map_PITCH, map_YAW;
 int state = 0;
-int gap_Degree = 7 ;
+int gap_Degree = 15 ;
 
 int RmotorPin1 = 2;
 int RmotorPin2 = 3;
@@ -55,48 +55,48 @@ void loop() {
   raw_PITCH = dataArray[1];
   raw_YAW = dataArray[2];
 
-  Serial.print(" || ROW = ");
+  Serial.print(" || RPY = ");
   Serial.print(dataArray[0], DEC);
-  Serial.print(" || PITCH = ");
+  Serial.print(" || ");
   Serial.print(dataArray[1], DEC);
-  Serial.print(" || YAW = ");
+  Serial.print(" || ");
   Serial.print(dataArray[2], DEC);
 
   if (raw_ROW > gap_Degree) {
-    map_ROW = map(raw_ROW, 0, 127, 4, 2);
+    map_ROW = map(raw_ROW, 0, 127, 8, 2);
   }
   if (raw_ROW < -gap_Degree) {
-    map_ROW = map(raw_ROW, -128, 0, -2, -4);
+    map_ROW = map(raw_ROW, -128, 0, -2, -8);
   }
   if (raw_ROW <= gap_Degree && raw_ROW >= -gap_Degree) {
     map_ROW = 0;
   }
 
   if (raw_PITCH > gap_Degree) {
-    map_PITCH = map(raw_PITCH, 0, 127, 4, 2);
+    map_PITCH = map(raw_PITCH, 0, 127, 8, 2);
   }
   if (raw_PITCH < -gap_Degree) {
-    map_PITCH = map(raw_PITCH, -128, 0, -2, -4);
+    map_PITCH = map(raw_PITCH, -128, 0, -2, -8);
   }
   if (raw_PITCH <= gap_Degree && raw_PITCH >= -gap_Degree) {
     map_PITCH = 0;
   }
 
   if (raw_YAW > gap_Degree) {
-    map_YAW = map(raw_YAW, 0, 127, 4, 2);
+    map_YAW = map(raw_YAW, 0, 127, 8, 2);
   }
   if (raw_YAW < -gap_Degree) {
-    map_YAW = map(raw_YAW, -128, 0, -2, -4);
+    map_YAW = map(raw_YAW, -128, 0, -2, -8);
   }
   if (raw_YAW <= gap_Degree && raw_YAW >= -gap_Degree) {
     map_YAW = 0;
   }
 
-  Serial.print(" ---- mapROW = ");
+  Serial.print(" -- mapRPY = ");
   Serial.print(map_ROW);
-  Serial.print(" || mapPITCH = ");
+  Serial.print(" || ");
   Serial.print(map_PITCH);
-  Serial.print(" || mapYAW = ");
+  Serial.print(" || ");
   Serial.print(map_YAW);
 
   //For ROW axis
@@ -274,7 +274,7 @@ void loop() {
   if (map_ROW == 0 && map_PITCH == 0 && map_YAW == 0){
     Serial.println(" ||| STOP");
   }
-  Serial.print(" \\ state = ");
+  Serial.print("state = ");
   Serial.print(state);
 }
 
